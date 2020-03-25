@@ -1,0 +1,74 @@
+.covid-19-app {
+  direction: rtl;
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: gray;
+  margin-bottom: 2rem;
+}
+.app-header h1{
+  margin-bottom: 0;
+}
+.app-header .last-update{
+  font-size: 1rem;
+}
+
+.introduction{
+  margin-right: 5px;
+}
+
+.daily-status{
+ text-align: center;
+}
+
+.daily-status .cube h3{
+  font-size: x-large;
+  margin-bottom: 1rem;
+}
+
+.daily-status .cube .total-number{
+  font-size: 4rem;
+  font-weight: lighter;
+} 
+
+.daily-status .cube .daily-number{
+  font-size: larger;
+} 
+
+.confirmed{
+  color: grey;
+}
+
+.deaths{
+  color: red;
+}
+.recovered{
+  color: green;
+}
+
+footer{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px;
+  text-align: center;
+  color: white;
+  background-color: rgb(54, 53, 53);
+}
+
+footer>p{
+  margin: 0;
+}
+
+footer a{
+ color: inherit !important;
+}
