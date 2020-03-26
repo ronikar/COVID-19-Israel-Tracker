@@ -1,14 +1,14 @@
 import "./CovidDailyStatus.css";
 
 import React from 'react';
-import { DailyReport } from "./react-app-env";
+import covid19 from "./react-app-env";
 
 interface Props {
-  todayItem: DailyReport
+  dailyReport: covid19.DailyReport
 }
 
-export function CovidDailyStatus({ todayItem }: Props) {
-  const { totalConfirmed, totalDeaths, totalRecovered, dailyConfirmed, dailyDeaths, dailyRecovered } = todayItem;
+export function CovidDailyStatus({ dailyReport }: Props) {
+  const { totalConfirmed, totalDeaths, totalRecovered, dailyConfirmed, dailyDeaths, dailyRecovered } = dailyReport;
 
   return < section className="daily-status" >
     <DailyStatusCube title={"מספר חולים מאומתים"} className="confirmed" total={totalConfirmed} daily={dailyConfirmed} />

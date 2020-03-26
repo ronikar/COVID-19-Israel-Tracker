@@ -1,19 +1,21 @@
 /// <reference types="react-scripts" />
 
-export interface Dictionary<T> {
-    [key: string]: T
+declare namespace covid19{
+    interface Dictionary<T> {
+        [key: string]: T
+    }
+    interface DailyReport {
+        id: string;
+        date: Date;
+        dailyConfirmed: number;
+        dailyRecovered: number;
+        dailyDeaths: number;
+        totalConfirmed: number;
+        totalRecovered: number;
+        totalDeaths: number;
+        activeCases: number;
+        closeCases: number;
+    }
 }
 
-
-
-export interface DailyReport {
-    date: Date;
-    dailyConfirmed: number;
-    dailyRecovered: number;
-    dailyDeaths: number;
-    totalConfirmed: number;
-    totalRecovered: number;
-    totalDeaths: number;
-    activeCases: number;
-    closeCases: number;
-}
+export default covid19;

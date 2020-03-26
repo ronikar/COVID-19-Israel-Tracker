@@ -1,10 +1,10 @@
 import "./CasesStatistics.css";
 
 import React from "react";
-import { DailyReport } from "./react-app-env";
+import covid19 from "./react-app-env";
 
 interface Props {
-    dailyReport: DailyReport
+    dailyReport: covid19.DailyReport
 }
 
 export function CasesStatistics({ dailyReport }: Props) {
@@ -30,7 +30,7 @@ function ActiveCasesCube({ activeCases, totalConfirmed }: ActiveCasesCubeProps) 
     return <div className="active-cases-cube">
         <h3>מספר חולים פעילים</h3>
         <div className="value">{activeCases}</div>
-        <div className="ratio"><span>{ratio.toFixed(2)}</span>מבין כלל המקרים </div>
+        <div className="ratio"><span>{ratio.toFixed(1)}</span>מבין כלל המקרים </div>
     </div>
 }
 
@@ -48,7 +48,7 @@ function CloseCasesCube({ title, value, closeCases, totalConfirmed }: CloseCases
     return <div className="close-cases-cube">
         <h3>{title}</h3>
         <div className="value">{value}</div>
-        <div className="ratio"><span>{closeRatio.toFixed(2)}</span> מבין המקרים הסגורים</div>
-        <div className="ratio"><span>{totalRatio.toFixed(2)}</span> מבין כלל הנדבקים</div>
+        <div className="ratio"><span>{closeRatio.toFixed(1)}</span> מבין המקרים הסגורים</div>
+        <div className="ratio"><span>{totalRatio.toFixed(1)}</span> מבין כלל הנדבקים</div>
     </div>
 }

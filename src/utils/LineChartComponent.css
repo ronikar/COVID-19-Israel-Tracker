@@ -1,0 +1,9 @@
+.line-chart{
+    width: 500px;
+}
+
+.recharts-wrapper{
+    display: flex;
+    justify-content: center;
+    direction: ltr;
+}
