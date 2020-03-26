@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import "./CovidDailyStatus.css";
+
+import React from 'react';
 import { DailyReport } from "./react-app-env";
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
 export function CovidDailyStatus({ todayItem }: Props) {
   const { totalConfirmed, totalDeaths, totalRecovered, dailyConfirmed, dailyDeaths, dailyRecovered } = todayItem;
 
-  return <section className="daily-status" >
+  return < section className="daily-status" >
     <DailyStatusCube title={"מספר חולים מאומתים"} className="confirmed" total={totalConfirmed} daily={dailyConfirmed} />
     <DailyStatusCube title={"מספר המתים"} className="deaths" total={totalDeaths} daily={dailyDeaths} />
     <DailyStatusCube title={"מספר חולים שהבריאו"} className="recovered" total={totalRecovered} daily={dailyRecovered} />
@@ -28,6 +30,6 @@ function DailyStatusCube({ title, className, total, daily }: DailyStatusCubeProp
   return <div className={componentClassName}>
     <h3>{title} </h3>
     <div className="total-number"> {total} </div>
-    <div className="daily-number" > {daily} ביממה האחרונה </div>
+    <div className="daily-number"> {daily} ביממה האחרונה </div>
   </div>;
 }

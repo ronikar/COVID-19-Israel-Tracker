@@ -1,0 +1,29 @@
+.daily-status {
+    text-align: center;
+}
+
+.daily-status .cube h3 {
+    font-size: x-large;
+    margin-bottom: 1rem;
+}
+
+.daily-status .cube .total-number {
+    font-size: 4rem;
+    font-weight: lighter;
+}
+
+.daily-status .cube .daily-number {
+    font-size: larger;
+}
+
+.confirmed {
+    color: grey;
+}
+
+.deaths {
+    color: red;
+}
+
+.recovered {
+    color: green;
+}
