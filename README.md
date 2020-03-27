@@ -1,2 +1,2 @@
 # COVID-19-Israel-Tracker
-Live statistics and graphs
+Live statistics and charts

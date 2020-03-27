@@ -1,4 +1,4 @@
-import "./CovidDailyStatus.css";
+import "./DailyStatus.css";
 
 import React from 'react';
 import covid19 from "./react-app-env";

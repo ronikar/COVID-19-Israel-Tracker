@@ -16,7 +16,7 @@ export function CasesStatistics({ dailyReport }: Props) {
             <CloseCasesCube title="מספר החולים שנפטרו" value={totalDeaths} {...dailyReport} />
             <CloseCasesCube title="מספר החולים שהחלימו" value={totalRecovered} {...dailyReport} />
         </div>
-    </section>
+    </section>;
 }
 
 interface ActiveCasesCubeProps {
@@ -31,7 +31,7 @@ function ActiveCasesCube({ activeCases, totalConfirmed }: ActiveCasesCubeProps) 
         <h3>מספר חולים פעילים</h3>
         <div className="value">{activeCases}</div>
         <div className="ratio"><span>{ratio.toFixed(1)}</span>מבין כלל המקרים </div>
-    </div>
+    </div>;
 }
 
 interface CloseCasesCubeProps {

@@ -14,9 +14,9 @@ export interface DailyReportData {
 
 const startDate = moment("15.02.2020", "DD.MM.YYYY").toDate();
 
-const confirmedCasesReports = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 7, 7, 10, 12, 12, 15, 17, 21, 25, 39, 50, 75, 97, 109, 143, 193, 213, 298, 337, 433, 677, 705, 883, 1071, 1442, 1930, 2369, 2666]
-const activeCasesReports = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 6, 6, 9, 11, 11, 14, 15, 19, 22, 36, 46, 71, 93, 105, 139, 189, 209, 294, 326, 422, 663, 689, 846, 1033, 1400, 1874, 2306, 2590];
-const totalDeathsReports = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 3, 5, 8];
+const confirmedCasesReports = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 7, 7, 10, 12, 12, 15, 17, 21, 25, 39, 50, 75, 97, 109, 143, 193, 213, 298, 337, 433, 677, 705, 883, 1071, 1442, 1930, 2369, 2693, 3035]
+const activeCasesReports = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 6, 6, 9, 11, 11, 14, 15, 19, 22, 36, 46, 71, 93, 105, 139, 189, 209, 294, 326, 422, 663, 689, 846, 1033, 1400, 1874, 2306, 2617, 2946];
+const totalDeathsReports = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 3, 5, 8, 10];
 
 //TODO: look for reliable dataset service
 export async function getIsraelCovid19Reports() {
@@ -25,7 +25,7 @@ export async function getIsraelCovid19Reports() {
     for (let index = 0; index < confirmedCasesReports.length; index++) {
         const date = getDate(startDate, index);
         const id = moment(date).format("DD/MM");
-        
+
         const totalConfirmed = confirmedCasesReports[index];
         const totalDeaths = totalDeathsReports[index];
         const activeCases = activeCasesReports[index];
@@ -38,7 +38,7 @@ export async function getIsraelCovid19Reports() {
         const dailyRecovered = isFirstItem ? totalRecovered : totalRecovered - reports[index - 1].totalRecovered;
         const dailyDeaths = isFirstItem ? totalDeaths : totalDeaths - reports[index - 1].totalDeaths;
 
-        reports.push({id, date, totalConfirmed, totalDeaths, totalRecovered, activeCases, closeCases, dailyConfirmed, dailyDeaths, dailyRecovered });
+        reports.push({ id, date, totalConfirmed, totalDeaths, totalRecovered, activeCases, closeCases, dailyConfirmed, dailyDeaths, dailyRecovered });
     }
 
     return Promise.resolve(reports);
