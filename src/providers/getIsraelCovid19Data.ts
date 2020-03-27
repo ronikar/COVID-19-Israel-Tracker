@@ -11,12 +11,15 @@ export interface DailyReportData {
     deaths: number;
     recovered: number
 }
+const DATE_FORMAT = "DD.MM.YYYY";
+const startDate = moment("20.02.2020", DATE_FORMAT).toDate();
 
-const startDate = moment("15.02.2020", "DD.MM.YYYY").toDate();
+const confirmedCasesReports = [0, 1, 1, 2, 2, 2, 2, 3, 7, 7, 10, 12, 12, 15, 17, 21, 25, 39, 50, 75, 97, 109, 143, 193, 213, 298, 337, 433, 677, 705, 883, 1071, 1442, 1930, 2369, 2693, 3035]
+const activeCasesReports = [0, 1, 1, 2, 2, 2, 2, 3, 6, 6, 9, 11, 11, 14, 15, 19, 22, 36, 46, 71, 93, 105, 139, 189, 209, 294, 326, 422, 663, 689, 846, 1033, 1400, 1874, 2306, 2617, 2944];
+const totalDeathsReports = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 3, 5, 8, 12];
 
-const confirmedCasesReports = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 7, 7, 10, 12, 12, 15, 17, 21, 25, 39, 50, 75, 97, 109, 143, 193, 213, 298, 337, 433, 677, 705, 883, 1071, 1442, 1930, 2369, 2693, 3035]
-const activeCasesReports = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 6, 6, 9, 11, 11, 14, 15, 19, 22, 36, 46, 71, 93, 105, 139, 189, 209, 294, 326, 422, 663, 689, 846, 1033, 1400, 1874, 2306, 2617, 2946];
-const totalDeathsReports = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 3, 5, 8, 10];
+const criticalCasesDataStartDate = moment("13.03.2020", DATE_FORMAT).toDate();
+const criticalCasesData = [3, 2, 2, 4, 5, 6, 6, 10, 15, 18, 29, 34, 39, 46, 49];
 
 //TODO: look for reliable dataset service
 export async function getIsraelCovid19Reports() {
@@ -38,7 +41,20 @@ export async function getIsraelCovid19Reports() {
         const dailyRecovered = isFirstItem ? totalRecovered : totalRecovered - reports[index - 1].totalRecovered;
         const dailyDeaths = isFirstItem ? totalDeaths : totalDeaths - reports[index - 1].totalDeaths;
 
-        reports.push({ id, date, totalConfirmed, totalDeaths, totalRecovered, activeCases, closeCases, dailyConfirmed, dailyDeaths, dailyRecovered });
+        let report: covid19.DailyReport = { id, date, totalConfirmed, totalDeaths, totalRecovered, activeCases, closeCases, dailyConfirmed, dailyDeaths, dailyRecovered };
+
+        const cirticalIndex = getDiffInDays(date, criticalCasesDataStartDate);
+
+        if (cirticalIndex >= 0) {
+            const criticalCases = criticalCasesData[cirticalIndex];
+            report = {
+                ...report,
+                criticalCases,
+                mildConditionCases: activeCases - criticalCases
+            }
+        }
+
+        reports.push(report);
     }
 
     return Promise.resolve(reports);
@@ -48,6 +64,10 @@ function getDate(date: Date, additionalDays: number) {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + additionalDays);
     return newDate;
+}
+
+function getDiffInDays(first: Date, second: Date) {
+    return moment(first).diff(moment(second), "days");
 }
 
 // export async function getIsraelCovid19Data(): Promise<DailyReport[]> {

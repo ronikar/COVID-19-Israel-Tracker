@@ -8,11 +8,13 @@ interface Props {
 }
 
 export function CasesStatistics({ dailyReport }: Props) {
-    const { totalDeaths, totalRecovered } = dailyReport;
+    const { totalDeaths, totalRecovered, mildConditionCases = 0, criticalCases = 0 } = dailyReport;
+    console.log(dailyReport);
     return <section className="active-close-statistics">
         <h2>מקרים פתוחים וסגורים בארץ</h2>
         <div className="cases-panel">
-            <ActiveCasesCube {...dailyReport} />
+            <ActiveCasesCube title="מספר חולים במצב קל ובינוני" value={mildConditionCases} {...dailyReport} />
+            <ActiveCasesCube title="מספר חולים במצב קשה" value={criticalCases} {...dailyReport} />
             <CloseCasesCube title="מספר החולים שנפטרו" value={totalDeaths} {...dailyReport} />
             <CloseCasesCube title="מספר החולים שהחלימו" value={totalRecovered} {...dailyReport} />
         </div>
@@ -20,17 +22,20 @@ export function CasesStatistics({ dailyReport }: Props) {
 }
 
 interface ActiveCasesCubeProps {
+    title: string;
+    value: number;
     activeCases: number;
     totalConfirmed: number;
 }
 
-function ActiveCasesCube({ activeCases, totalConfirmed }: ActiveCasesCubeProps) {
-
-    const ratio = activeCases / totalConfirmed * 100;
+function ActiveCasesCube({ title, value, activeCases, totalConfirmed }: ActiveCasesCubeProps) {
+    const activeRatio = value / activeCases * 100;
+    const totalRatio = value / totalConfirmed * 100;
     return <div className="active-cases-cube">
-        <h3>מספר חולים פעילים</h3>
-        <div className="value">{activeCases}</div>
-        <div className="ratio"><span>{ratio.toFixed(1)}</span>מבין כלל המקרים </div>
+        <h3>{title}</h3>
+        <div className="value">{value}</div>
+        <div className="ratio"><span>{activeRatio.toFixed(1)}</span> מבין החולים הפעילים</div>
+        <div className="ratio"><span>{totalRatio.toFixed(1)}</span>מבין כלל המקרים </div>
     </div>;
 }
 

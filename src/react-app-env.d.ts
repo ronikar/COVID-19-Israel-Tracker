@@ -15,6 +15,8 @@ declare namespace covid19{
         totalDeaths: number;
         activeCases: number;
         closeCases: number;
+        criticalCases?: number;
+        mildConditionCases?: number;
     }
 }
 
