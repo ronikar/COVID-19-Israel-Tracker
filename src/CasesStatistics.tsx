@@ -11,7 +11,7 @@ export function CasesStatistics({ dailyReport }: Props) {
     const { totalDeaths, totalRecovered, mildConditionCases = 0, criticalCases = 0 } = dailyReport;
     console.log(dailyReport);
     return <section className="active-close-statistics">
-        <h2>מקרים פתוחים וסגורים בארץ</h2>
+        <h2>התפלגות המקרים בארץ</h2>
         <div className="cases-panel">
             <ActiveCasesCube title="מספר חולים במצב קל ובינוני" value={mildConditionCases} {...dailyReport} />
             <ActiveCasesCube title="מספר חולים במצב קשה" value={criticalCases} {...dailyReport} />
