@@ -1,5 +1,6 @@
 import moment from "moment";
 import covid19 from "../react-app-env";
+import { createReportFile } from "../scripts/createReportsFile";
 //import { isNumber } from "util";
 
 // const DATE_FORMAT = "YYYY-M-D"
@@ -25,6 +26,7 @@ const criticalCasesData = [3, 2, 2, 4, 5, 6, 6, 10, 15, 18, 29, 34, 39, 46, 49, 
 export async function getIsraelCovid19Reports() {
     const reports: covid19.DailyReport[] = [];
 
+    console.log(await createReportFile())
     for (let index = 0; index < confirmedCasesReports.length; index++) {
         const date = getDate(startDate, index);
         const id = moment(date).format("DD/MM");
