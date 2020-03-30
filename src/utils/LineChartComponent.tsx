@@ -2,7 +2,7 @@
 import "./LineChartComponent.css";
 
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, TooltipFormatter } from "recharts";
 
 interface DataKeyItem {
     id: string;
@@ -14,9 +14,10 @@ interface ChartProps {
     data: any;
     lineDataKeys: DataKeyItem[];
     xAxizDataKeys?: string;
+    formatter?: TooltipFormatter;
 }
 
-export function LineChartComponent({ title, data, xAxizDataKeys = "id", lineDataKeys }: ChartProps) {
+export function LineChartComponent({ title, data, xAxizDataKeys = "id", lineDataKeys, formatter }: ChartProps) {
     return <div className="line-chart">
         <h3>{title}</h3>
         <LineChart
@@ -26,7 +27,7 @@ export function LineChartComponent({ title, data, xAxizDataKeys = "id", lineData
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey={xAxizDataKeys} />
             <YAxis />
-            <Tooltip />
+            <Tooltip formatter={formatter} />
             <Legend />
             {lineDataKeys.map(item => <Line type="monotone" dataKey={item.id} stroke={item.color} strokeWidth={3} dot={false} />)}
         </LineChart>
