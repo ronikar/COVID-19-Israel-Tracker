@@ -21,7 +21,7 @@ export function ConfirmedCasesStatistics({ reports }: Props) {
 
     const reportsWithCriticalCases = useMemo(() => reports.filter(_ => !!_.criticalCases), [reports]);
     const criticalCasesPercentage = useMemo(() => reportsWithCriticalCases.map(report =>
-        ({ percentage: (report.criticalCases || 0) * 100 / report.activeCases })), [reports]);
+        ({ percentage: (report.criticalCases || 0) * 100 / report.activeCases })), [reportsWithCriticalCases]);
 
     const percentageFormmater: TooltipFormatter = (value, _, __) => `${(value as number).toFixed(2)}%`;
 

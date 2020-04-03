@@ -18,6 +18,16 @@ declare namespace covid19{
         criticalCases?: number;
         mildConditionCases?: number;
     }
+
+    namespace mathdro{
+        interface DailyReport{
+            confirmed: number;
+            deaths: number;
+            recovered: number;
+            active: number;
+            lastUpdate: Date;
+        }
+    }
 }
 
 export default covid19;
