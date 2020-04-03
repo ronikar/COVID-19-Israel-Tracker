@@ -9,7 +9,7 @@ interface Props {
 
 export function CasesStatistics({ dailyReport }: Props) {
     const { totalDeaths, totalRecovered, mildConditionCases = 0, criticalCases = 0 } = dailyReport;
-    console.log(dailyReport);
+    
     return <section className="active-close-statistics">
         <h2>התפלגות המקרים בארץ</h2>
         <div className="cases-panel">

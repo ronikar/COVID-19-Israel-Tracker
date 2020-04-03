@@ -68,8 +68,7 @@ function _createDailyReport(basicReport: covid19.mathdro.DailyReport, previousRe
             mildConditionCases: activeCases - criticalCases
         }
     }
-    console.log(basicReport);
-    console.log(report);
+    
     return report;
 }
 
