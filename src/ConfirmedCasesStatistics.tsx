@@ -18,10 +18,13 @@ const CRITICAL_LINE_DATA_KEYS = [{ id: "criticalCases", color: "#c1bc08" }];
 
 export function ConfirmedCasesStatistics({ reports }: Props) {
     const criticalPercentageLineDataKeys = useMemo(() => [{ id: "percentage", color: "#c1bc08" }], []);
+    const criticalCasesChangeLineDataKeys = useMemo(() => [{ id: "criticalCasesChange", color: "#c1bc08" }], []);
 
     const reportsWithCriticalCases = useMemo(() => reports.filter(_ => !!_.criticalCases), [reports]);
     const criticalCasesPercentage = useMemo(() => reportsWithCriticalCases.map(report =>
         ({ percentage: (report.criticalCases || 0) * 100 / report.activeCases })), [reportsWithCriticalCases]);
+
+    const criticalCasesChanges = useMemo(() => _getCriticalCaseChange(reportsWithCriticalCases as any), [reportsWithCriticalCases]);
 
     const percentageFormmater: TooltipFormatter = (value, _, __) => `${(value as number).toFixed(2)}%`;
 
@@ -32,7 +35,16 @@ export function ConfirmedCasesStatistics({ reports }: Props) {
             <BarChartComponent title="מספר נדבקים יומי" data={reports} barDataKeys={DAILY_BAR_DATA_KEYS} />
             <LineChartComponent title="מספר חולים פעילים" data={reports} lineDataKeys={ACTIVE_LINE_DATA_KEYS} />
             <LineChartComponent title="חולים במצב קשה" data={reportsWithCriticalCases} lineDataKeys={CRITICAL_LINE_DATA_KEYS} />
+            <BarChartComponent title="שינוי במספר החולים קשה" data={criticalCasesChanges} barDataKeys={criticalCasesChangeLineDataKeys} />
             <LineChartComponent title="אחוז החולים במצב קשה מבין כלל החולים" data={criticalCasesPercentage} lineDataKeys={criticalPercentageLineDataKeys} formatter={percentageFormmater} />
         </div>
     </section>
+}
+
+interface DailyReportWithCriticalCases extends covid19.DailyReport {
+    criticalCases: number;
+}
+
+function _getCriticalCaseChange(reports: DailyReportWithCriticalCases[]) {
+    return reports.map(({ date, criticalCases }, index) => ({ date, criticalCasesChange: index === 0 ? 0 : criticalCases - reports[index - 1].criticalCases }));
 }

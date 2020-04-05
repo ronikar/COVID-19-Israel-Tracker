@@ -8,13 +8,14 @@ interface Props {
 }
 
 export function CasesStatistics({ dailyReport }: Props) {
-    const { totalDeaths, totalRecovered, mildConditionCases = 0, criticalCases = 0 } = dailyReport;
-    
+    const { totalDeaths, totalRecovered, mildConditionCases, criticalCases, activeCases } = dailyReport;
+
     return <section className="active-close-statistics">
         <h2>התפלגות המקרים בארץ</h2>
         <div className="cases-panel">
-            <ActiveCasesCube title="מספר חולים במצב קל ובינוני" value={mildConditionCases} {...dailyReport} />
-            <ActiveCasesCube title="מספר חולים במצב קשה" value={criticalCases} {...dailyReport} />
+            {!mildConditionCases && !criticalCases && <ActiveCasesCube title="מספר חולים פעילים" value={activeCases} {...dailyReport} />}
+            {mildConditionCases && <ActiveCasesCube title="מספר חולים במצב קל ובינוני" value={mildConditionCases} {...dailyReport} />}
+            {criticalCases && <ActiveCasesCube title="מספר חולים במצב קשה" value={criticalCases} {...dailyReport} />}
             <CloseCasesCube title="מספר החולים שנפטרו" value={totalDeaths} {...dailyReport} />
             <CloseCasesCube title="מספר החולים שהחלימו" value={totalRecovered} {...dailyReport} />
         </div>

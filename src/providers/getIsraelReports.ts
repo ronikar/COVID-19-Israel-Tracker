@@ -5,10 +5,6 @@ import { isNumber } from "util";
 import { getReportId } from "../utils/getReportId";
 import { getDailyReportFromArchive } from "./getDailyReportFromArchive";
 import { getTodayReport, getDailyReport } from "./getDailyReport";
-//import { isNumber } from "util";
-
-// const DATE_FORMAT = "YYYY-M-D"
-// const ISRAEL_KEY = "Israel";
 
 export interface DailyReportData {
     date: string;
